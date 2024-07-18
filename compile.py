@@ -85,11 +85,11 @@ def _install_arduino_lib(name, version=None):
 
 def _compile_arduino_sketch(sketch_path, board, output_path):
     os.makedirs("dist/", exist_ok=True)
-    return _run_shell_command(["arduino-cli", "compile",
+   return _run_shell_command(["arduino-cli", "compile",
                                "-b", board,
-                               "-o", f"dist/{output_path}",
+                               "--libraries","libraries","-e",
+                               "--output-dir", f"dist/{output_path}",
                                sketch_path], stdout=True)
-
 
 def _run_shell_command(arguments, stdout=False, stderr=True):
     process = subprocess.run(arguments, check=False, capture_output=True)
